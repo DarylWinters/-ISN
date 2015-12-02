@@ -158,7 +158,7 @@ public class Miniprojet1_16 {
 
         affichageDecode("YS ZA JABJA AYJ ZSYSTZA FGUY IFAX TSAV JNIFISZZA");
         
-      
+        
         ligne();
         ligne();
        

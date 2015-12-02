@@ -16,56 +16,60 @@ public class Exercice3_15 {
     /**
      * @param args the command line arguments
      */
-    
     /**
-     * Fonction qui lit les nombres d'un tableau de nombre entier et crée un tableau répartissant les nombres pairs à gauche et impairs à droite
-     * @param tableau 
+     *  Fonction tri
+     * @param  tableau (un tableau d'entier)
+     * @return Un tableau de même taille que tableau, 
+     *         contenant tous les éléments de tableau
+     *         réarrangés les pairs au début et les impairs en fin.
      */
    static int[] RangementTableau(int[] tableau){
        
-       int[] nouvelleTable = new int[tableau.length];       
-       for (int i=0; i<tableau.length; i++){
-          if (tableau[i] % 2 == 0) {
-            
-              nouvelleTable[i] = (tableau[i]); 
-            
-             System.out.println(tableau[i]);
-  
-          }
-          else { 
-           nouvelleTable[i] = (tableau[i]); 
-           System.out.println("           "+tableau[i]);
-          }
-        System.out.println("      |");  
+        int[] tableauRange = new int[tableau.length];
+        int indexPair = 0;
+        int indexImpair = (tableau.length - 1) ;    
+        
+        for (int i=0; i<tableau.length; i++){
+             if (tableau[i] % 2 == 0) {           
+                tableauRange[indexPair] = tableau[i];
+                indexPair++; 
+             }
+             else {
+                 tableauRange[indexImpair] = tableau[i];
+                 indexImpair--; 
+             }
         }
-        return nouvelleTable; 
+       
+      
+        
+        return tableauRange; 
     }
-   
-  static void Trait(){     
-          System.out.println("---------------");               
-    }
+       
+
+  
     
     public static void main(String[] args) {
-        
+        // TODO code application logic here
         int n;
         Scanner in = new Scanner(System.in);
         System.out.print("Donner le nombre d'entiers: ");
         n = in.nextInt();
         int[] table = new int[n];
-        
+       
         System.out.println("\n Génération d'une liste d'entiers ( "+n+" entiers)");
         for (int c =0;c<n;c++){
             table[c] = (int) (1+Math.random()*101);
-            System.out.println(table[c]);
+            System.out.print(table[c]+", ");
         }
        
         System.out.println("\n" + "Génération terminé");
         System.out.println("Génération du tableau : \n");
-        Trait();
-        System.out.println("Pairs | Impairs");
-        Trait();
-        RangementTableau(table); 
-        Trait();
+        int[] tableaurange = RangementTableau(table); 
+        
+        for (int i=0; i<table.length; i++){ 
+            System.out.print(tableaurange[i]+" | ");
+        }
+
     }
 
     

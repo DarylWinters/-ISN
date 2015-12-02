@@ -17,7 +17,7 @@ public class Exercice3_14 {
      * @param args the command line arguments
      */
         static int plusGrandEntier(int[] tableau){
-        int lePlusGrand = 0;
+        int lePlusGrand = tableau[0];
         for (int i=0; i<tableau.length; i++){
              if (tableau[i]>lePlusGrand) {           
                 lePlusGrand = tableau[i];
