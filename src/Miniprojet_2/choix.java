@@ -72,7 +72,7 @@ public class choix extends javax.swing.JFrame {
         });
 
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Etapes:   \n1 - Image de fond\n2 - Image a cacher\n3 - Vous pouvez enregistrer en cliquant sur ficher puis enregistrer");
+        jTextPane1.setText("Etapes:   \n1 - Image de fond\n2 - Image à cacher\n3 - Vous pouvez enregistrer en cliquant sur ficher puis enregistrer");
         jScrollPane3.setViewportView(jTextPane1);
 
         jTextPane2.setEditable(false);
@@ -81,7 +81,7 @@ public class choix extends javax.swing.JFrame {
 
         jTextField1.setForeground(new java.awt.Color(255, 0, 51));
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("ATTENTION FONCTIONNE SEULEMENT IMAGES 24Bits !");
+        jTextField1.setText("ATTENTION FONCTIONNE SEULEMENT AVEC DES IMAGES 24Bits !");
         jTextField1.setCaretColor(new java.awt.Color(255, 0, 51));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,14 +95,14 @@ public class choix extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField1)
@@ -120,10 +120,10 @@ public class choix extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,12 +136,11 @@ public class choix extends javax.swing.JFrame {
 
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+       // Action lorsque l'on clique sur le boutton 'Extraire'
         try {
             String repertoireImage = "C:\\Users\\guilh\\Desktop\\img";
             IHMImage supportModifieTest, messageRecupereTest;
             supportModifieTest = IHMImage.ouvrir(repertoireImage);
-        //  supportModifieTest.afficher();
             messageRecupereTest = extrait(supportModifieTest);
             messageRecupereTest.afficher("Image cachée");
         } catch (IOException ex) {
@@ -150,22 +149,23 @@ public class choix extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        // Action lorsque l'on clique sur le boutton 'cacher'
         
         try {
-            // TODO add your handling code here:
+            
             String repertoireImage = "C:\\Users\\guilh\\Desktop\\img";
             IHMImage support, message, supportModifie;
             support = IHMImage.ouvrir(repertoireImage);
-           //support.afficher("LE FOND");
             message = IHMImage.ouvrir(repertoireImage);
+            
+            // Utilise la fonction taille() qui vérifie si l'image que l'on veut cacher est bien plus petite que son support.
             if (taille(support, message) == true){
-             
-           // message.afficher("Message à cacher");
-            supportModifie = cache(support, message);
-            supportModifie.afficher("Image caché");
+                supportModifie = cache(support, message);
+                supportModifie.afficher("Image caché");
             } else {
+                // Affiche un message invitant l'utilisateur de recommencer avec une autre image.
                 JOptionPane.showMessageDialog(null,"Erreur: Image à cacher plus grande que le fond. Veuillez réessayer" , "ATTENTION",  JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException ex) {
