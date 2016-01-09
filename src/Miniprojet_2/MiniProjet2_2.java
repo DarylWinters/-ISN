@@ -9,7 +9,7 @@ import java.io.IOException;
 public class MiniProjet2_2 {
 
     /**
-     * Fonction qui détermine si les dimensions de l'image de fond est supérieure à celle du message que l'on veut cacher
+     * Fonction qui détermine si les dimensions de l'image de fond sont supérieures à celles du message que l'on veut cacher
      * @param fond (parle de lui même)
      * @param imageACacher
      * @return Un booléen (Si oui ou non c'est plus grand)
