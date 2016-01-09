@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  *
- * @author mettre à jour
+ * @author Guilhem PECH
  */
 public class MiniProjet2_2 {
 
