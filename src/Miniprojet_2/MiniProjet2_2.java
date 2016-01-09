@@ -4,20 +4,20 @@ import java.io.IOException;
 
 /**
  *
- * @author Guilhem PECH
+ * @author mettre à jour
  */
 public class MiniProjet2_2 {
 
     /**
-     * Fonction qui détermine si les dimensions de l'image de fond sont supérieures à celles du message que l'on veut cacher
+     * Fonction qui détermine si les dimensions de l'image de fond est égale à celle du message que l'on veut cacher
      * @param fond (parle de lui même)
      * @param imageACacher
      * @return Un booléen (Si oui ou non c'est plus grand)
      */
     public static boolean taille(IHMImage fond, IHMImage imageACacher) {
         boolean possible, seccondition, premcondition;
-        premcondition = fond.hauteur() >= imageACacher.hauteur();
-        seccondition = fond.largeur()>= imageACacher.largeur(); 
+        premcondition = fond.hauteur() == imageACacher.hauteur();
+        seccondition = fond.largeur()== imageACacher.largeur(); 
            
         possible = premcondition == true && seccondition == true; 
                        
