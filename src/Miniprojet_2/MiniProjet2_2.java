@@ -1,5 +1,6 @@
 package Miniprojet_2; // mettre à jour
 import java.io.IOException;
+import java.awt.Graphics2D;
 
 
 /**
@@ -16,13 +17,15 @@ public class MiniProjet2_2 {
      */
     public static boolean taille(IHMImage fond, IHMImage imageACacher) {
         boolean possible, seccondition, premcondition;
-        premcondition = fond.hauteur() == imageACacher.hauteur();
-        seccondition = fond.largeur()== imageACacher.largeur(); 
+        premcondition = fond.hauteur() >= imageACacher.hauteur();
+        seccondition = fond.largeur()>= imageACacher.largeur(); 
            
         possible = premcondition == true && seccondition == true; 
-                       
+               
         return possible;
     }
+    
+   
     
     /**
      * Cette fonction 'cache' une image dans une autre image en utilisant le procédé de LSB (Least Significant Bit) 
@@ -31,12 +34,28 @@ public class MiniProjet2_2 {
      * @return L'image caché dans l'image
      */
     public static IHMImage cache(IHMImage fond, IHMImage imageACacher) {
-                      
-        // Initialisation d'une nouvelle image qui a les dimension du support    
-        IHMImage imgCacheDansImage = new IHMImage(fond.largeur(), fond.hauteur());
+        
+        int hauteur = fond.hauteur();
+        int largeur = fond.hauteur(); 
+                
+        // Rogne l'image de fond si trop grande.
+        if (fond.hauteur()> imageACacher.hauteur() || fond.largeur()> imageACacher.largeur() ){
           
-        for (int j = 0 ; (j < fond.hauteur()); j++){
-            for (int i = 0 ; (i < fond.largeur()) ; i++){
+          int h = imageACacher.hauteur();
+          int l  = imageACacher.largeur(); 
+          fond = fond.rogne(0, 0, l, h); 
+          
+          
+          hauteur = fond.hauteur();
+          largeur = fond.largeur();
+        }
+        
+        
+        // Initialisation d'une nouvelle image qui a les dimension du support   
+        IHMImage imgCacheDansImage = new IHMImage(largeur, hauteur);
+        
+        for (int j = 0 ; (j < hauteur); j++){
+            for (int i = 0 ; (i < largeur) ; i++){
                    
                    // Grâce a ce procédé met à 0 les 3 derniers bits de chaques pixels de l'image de fond
                 int[] rgb = fond.getPixel(i,j);
