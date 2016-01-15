@@ -7,7 +7,6 @@ package Miniprojet_2;
 
 import static Miniprojet_2.MiniProjet2_2.cache;
 import static Miniprojet_2.MiniProjet2_2.extrait;
-import static Miniprojet_2.MiniProjet2_2.taille;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,12 +48,13 @@ public class choix extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
         setLocationByPlatform(true);
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(492, 357));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Voulez vous cacher une image ou l'extraire ?");
         jLabel1.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton1.setText("Cacher");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,16 +109,16 @@ public class choix extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
@@ -160,13 +160,10 @@ public class choix extends javax.swing.JFrame {
             message = IHMImage.ouvrir(repertoireImage);
             
             // Utilise la fonction taille() qui vérifie si l'image que l'on veut cacher est bien plus petite que son support.
-            if (taille(support, message) == true){
+           
                 supportModifie = cache(support, message);
                 supportModifie.afficher("Image caché");
-            } else {
-                // Affiche un message invitant l'utilisateur de recommencer avec une autre image.
-                JOptionPane.showMessageDialog(null,"Erreur: Image à cacher plus grande que le fond. Veuillez réessayer" , "ATTENTION",  JOptionPane.ERROR_MESSAGE);
-            }
+           
         } catch (IOException ex) {
             Logger.getLogger(choix.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -204,6 +201,7 @@ public class choix extends javax.swing.JFrame {
             @Override
             public void run() {
                 new choix().setVisible(true);
+                
             }
         });
     }
