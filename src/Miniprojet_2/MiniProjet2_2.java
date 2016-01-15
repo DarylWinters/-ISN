@@ -1,6 +1,4 @@
 package Miniprojet_2; // mettre à jour
-import java.io.IOException;
-import java.awt.Graphics2D;
 
 
 /**
@@ -9,23 +7,29 @@ import java.awt.Graphics2D;
  */
 public class MiniProjet2_2 {
 
-    /**
-     * Fonction qui détermine si les dimensions de l'image de fond est égale à celle du message que l'on veut cacher
-     * @param fond (parle de lui même)
-     * @param imageACacher
-     * @return Un booléen (Si oui ou non c'est plus grand)
-     */
-    public static boolean taille(IHMImage fond, IHMImage imageACacher) {
-        boolean possible, seccondition, premcondition;
-        premcondition = fond.hauteur() >= imageACacher.hauteur();
-        seccondition = fond.largeur()>= imageACacher.largeur(); 
-           
-        possible = premcondition == true && seccondition == true; 
-               
-        return possible;
+   /**
+    * Fonction qui compare la hauteur de deux image et renvoi la plus petite hauteur
+    * @param fond
+    * @param imageACacher
+    * @return La plus petite hauteur
+    */
+    public static int hauteurIdeale(IHMImage fond, IHMImage imageACacher) {
+        return Math.min(fond.hauteur(),imageACacher.hauteur());
     }
     
-   
+    /**
+     * Fonction qui compare la largeur de deux image et renvoi la plus petite largeur
+     * @param fond
+     * @param imageACacher
+     * @return La plus petite largeur
+     */
+    public static int largeurIdeale(IHMImage fond, IHMImage imageACacher) {
+        return Math.min(fond.largeur(), imageACacher.largeur());
+    }
+    
+    
+    
+    
     
     /**
      * Cette fonction 'cache' une image dans une autre image en utilisant le procédé de LSB (Least Significant Bit) 
@@ -34,38 +38,23 @@ public class MiniProjet2_2 {
      * @return L'image caché dans l'image
      */
     public static IHMImage cache(IHMImage fond, IHMImage imageACacher) {
+                      
+        // Initialisation d'une nouvelle image qui a les dimension du support    
+        IHMImage imgCacheDansImage = new IHMImage(largeurIdeale(fond,imageACacher), hauteurIdeale(fond,imageACacher));
+           
         
-        int hauteur = fond.hauteur();
-        int largeur = fond.hauteur(); 
-                
-        // Rogne l'image de fond si trop grande.
-        if (fond.hauteur()> imageACacher.hauteur() || fond.largeur()> imageACacher.largeur() ){
-          
-          int h = imageACacher.hauteur();
-          int l  = imageACacher.largeur(); 
-          fond = fond.rogne(0, 0, l, h); 
-          
-          
-          hauteur = fond.hauteur();
-          largeur = fond.largeur();
-        }
-        
-        
-        // Initialisation d'une nouvelle image qui a les dimension du support   
-        IHMImage imgCacheDansImage = new IHMImage(largeur, hauteur);
-        
-        for (int j = 0 ; (j < hauteur); j++){
-            for (int i = 0 ; (i < largeur) ; i++){
+        for (int j = 0 ; j <  imgCacheDansImage.hauteur(); j++){
+            for (int i = 0 ; i < imgCacheDansImage.largeur(); i++){
                    
                    // Grâce a ce procédé met à 0 les 3 derniers bits de chaques pixels de l'image de fond
                 int[] rgb = fond.getPixel(i,j);
-                int rouge = rgb[0] & 248;
-                int vert = rgb[1] & 248;
-                int bleu = rgb[2] & 248;
+                int rouge = rgb[0] & 0b11111000;
+                int vert = rgb[1] & 0b11111000;
+                int bleu = rgb[2] & 0b11111000;
                    
                    // On met à 0 les bits 'non forts' et on décale de 5 bits pour avoir les 3 bits 'fort' à la place des derniers (de l'image à cacher)
                 int[] rgb1 = imageACacher.getPixel(i,j);
-                int rouge1 = (rgb1[0]& 0b11100000)>>5;
+                int rouge1 = (rgb1[0]& 0b11100000)>>5; 
                 int vert1 = (rgb1[1]& 0b11100000)>>5;
                 int bleu1 = (rgb1[2]& 0b11100000)>>5;
                    
@@ -79,9 +68,10 @@ public class MiniProjet2_2 {
                 imgCacheDansImage.putPixel(i, j, r,v,b);
             }
         } 
+
     return imgCacheDansImage;
     }
-         
+
                     
     /**
      * Cette fonction extrait l'image caché par la fonction cache(img1,img2) 
@@ -107,15 +97,5 @@ public class MiniProjet2_2 {
         }
         return imgExtraite;
     }
-    
-    
-    /**
-     * @param args the command line arguments
-     * @throws java.io.IOException
-     */
-    public static void main(String[] args)  throws IOException {
-        // Interface graphique 
-        choix.main(args); 
-        
-    }
+   
 }
